@@ -1,0 +1,7 @@
+{
+  "globalDependencies": {
+    "jquery": "registry:dt/jquery#1.10.0+20160704162008",
+    "node": "registry:dt/node#6.0.0+20160621231320",
+    "noisejs": "registry:dt/noisejs#0.0.0+20160316155526"
+  }
+}
