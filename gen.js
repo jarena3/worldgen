@@ -1,9 +1,7 @@
 function gen(mapX, mapY) {
     var start = Date.now();
-    let map = new Worldmap.HeightMap(mapX, mapY);
-    map.init();
-    Worldmap.rollingParticle(map, 2500, 4000);
-    map.render();
+    var p = new PerlinNoise.Perlin(0);
+    console.log(p.OctavePerlin(12, 22, 32, 42, 52));
     var end = Date.now();
     console.log('Rendered in ' + (end - start) + ' ms');
 }
