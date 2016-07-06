@@ -1,3 +1,4 @@
+
 namespace Worldmap {
   export class coordinate {
     x: number;
@@ -60,14 +61,17 @@ namespace Worldmap {
         render() {
           // build pixelarray
             var pixelArray = [];
+            var n = new Noise(99);
             for (var i: number = 0; i < this.sizeY; i++) {
                 for (var j: number = 0; j < this.sizeX; j++) {
                     var c: number;
-                    if (this.data[i][j]) {
-                        c = this.data[i][j] > 255 ? 255 : this.data[i][j];
-                    } else {
-                        c = 0;
-                    }
+                    // if (this.data[i][j]) {
+                    //     c = this.data[i][j] > 255 ? 255 : this.data[i][j];
+                    // } else {
+                    //     c = 0;
+                    // }
+                    c = (n.simplex3(i / 130, j / 130, 0.0564)) > 0? 255 : 0;
+
                     pixelArray.push(c, c, c, 255) //R,G,B,A
                 }
             }

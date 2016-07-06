@@ -1,7 +1,6 @@
 {
   "name": "worldgen",
   "version": "1.0.0",
-  "description": "",
   "main": "gen.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,6 +8,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jquery": "^3.0.0"
-  }
+    "jquery": "^3.0.0",
+    "noisejs": "^2.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jarena3/worldgen.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jarena3/worldgen/issues"
+  },
+  "homepage": "https://github.com/jarena3/worldgen#readme",
+  "description": ""
 }
