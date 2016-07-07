@@ -1,38 +1,16 @@
 
-namespace Worldmap {
-  export class coordinate {
-    x: number;
-    y: number;
-    constructor(xCoord: number, yCoord: number) {
-      this.x = xCoord;
-      this.y = yCoord;
-    }
-  }
+namespace Maps {
 
-  export class Particle {
-      constructor(public coord: coordinate, public lifespan: number) { }
-      moveDownhill(clampX:number, clampY:number) {
-          this.coord = new coordinate((this.coord.x + this.binaryFall()), (this.coord.y + this.binaryFall()));
-          this.lifespan--;
-      }
-
-      private binaryFall() : number {
-          let rnd = Math.random();
-          if (rnd < 0.333) return -1;
-          if (rnd > 0.666) return 1;
-          return 0;
-      }
-
-  }
-
-    export class HeightMap {
+    export class PerlinMap {
         data;
         sizeX: number;
         sizeY: number;
-        constructor(mapMaxX: number, mapMaxY: number) {
+        freq: number;
+        constructor(mapMaxX: number, mapMaxY: number, frequency:number) {
             this.sizeX = mapMaxX;
             this.sizeY = mapMaxY
             this.data = [];
+            this.freq = frequency;
         }
 
         init() {
@@ -61,7 +39,7 @@ namespace Worldmap {
         render() {
           // build pixelarray
             var pixelArray = [];
-            var n = new Noise(99);
+            var n = new Noise();
             for (var i: number = 0; i < this.sizeY; i++) {
                 for (var j: number = 0; j < this.sizeX; j++) {
                     var c: number;
@@ -70,7 +48,11 @@ namespace Worldmap {
                     // } else {
                     //     c = 0;
                     // }
-                    c = (n.simplex3(i / 130, j / 130, 0.0564)) > 0? 255 : 0;
+
+                    var nx = j/this.sizeX - 0.5, ny = i/this.sizeY - 0.5;
+                    var o = n.perlin2(this.freq * nx, this.freq * ny)/ 2 + 0.5;
+
+                    c = Math.floor(o * 255);
 
                     pixelArray.push(c, c, c, 255) //R,G,B,A
                 }
@@ -90,26 +72,11 @@ namespace Worldmap {
             ctx.putImageData(idata, 0, 0);
 
         }
-    }
-
-    function randomRange(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    export function rollingParticle(map: HeightMap, numParticles: number, particleLifespan: number) {
-        for (let i = numParticles; i > 0; i--) {
-          var newCoord = new coordinate(randomRange(0, map.sizeY - 1), randomRange(0, map.sizeX - 1))
-            var p = new Particle(newCoord, particleLifespan);
-            while (p.lifespan > 0) {
-                if (p.coord.x < 0 || p.coord.x > map.sizeX || p.coord.y < 0 || p.coord.y > map.sizeY) {
-                  p.lifespan = 0;
-                  continue;
-                }
-                map.lighten(p.coord.x, p.coord.y);
-                p.moveDownhill(map.sizeY, map.sizeX)
-            }
-        }
 
     }
+
+
+
+
 
 }

@@ -2,8 +2,8 @@
 function gen(mapX: number, mapY: number) {
   var start = Date.now();
 
-  var p = new PerlinNoise.Perlin(0);
-  console.log(p.OctavePerlin(12,22,32,42,52));
+  var m = new Maps.PerlinMap(mapX, mapY, 9);
+  m.render();
 
 
   var end = Date.now();
@@ -11,4 +11,4 @@ function gen(mapX: number, mapY: number) {
 
 }
 
-gen(900, 900);
+gen(500, 300);

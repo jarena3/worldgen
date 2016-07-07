@@ -1,8 +1,8 @@
 function gen(mapX, mapY) {
     var start = Date.now();
-    var p = new PerlinNoise.Perlin(0);
-    console.log(p.OctavePerlin(12, 22, 32, 42, 52));
+    var m = new Maps.PerlinMap(mapX, mapY, 9);
+    m.render();
     var end = Date.now();
     console.log('Rendered in ' + (end - start) + ' ms');
 }
-gen(900, 900);
+gen(500, 300);
