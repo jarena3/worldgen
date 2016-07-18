@@ -64,6 +64,7 @@ namespace Maps {
 
             //TEMP!!! Inject
             var canv = document.createElement("canvas");
+            $('#mapCanvas').append(canv);
             canv.width = this.sizeX;
             canv.height = this.sizeY;
             document.body.appendChild(canv);

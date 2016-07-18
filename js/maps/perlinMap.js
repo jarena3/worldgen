@@ -41,6 +41,7 @@ var Maps;
             }
             var cArray = Uint8ClampedArray.from(pixelArray);
             var canv = document.createElement("canvas");
+            $('#mapCanvas').append(canv);
             canv.width = this.sizeX;
             canv.height = this.sizeY;
             document.body.appendChild(canv);

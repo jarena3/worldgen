@@ -8,6 +8,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^3.3.6",
     "jquery": "^3.0.0",
     "noisejs": "^2.1.0",
     "ts-loader": "^0.8.2"
