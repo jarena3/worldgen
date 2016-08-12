@@ -6,11 +6,13 @@ namespace Maps {
         sizeX: number;
         sizeY: number;
         freq: number;
-        constructor(mapMaxX: number, mapMaxY: number, frequency:number) {
+        seaLevel: number;
+        constructor(mapMaxX: number, mapMaxY: number, frequency:number, seaLevel:number) {
             this.sizeX = mapMaxX;
             this.sizeY = mapMaxY
             this.data = [];
             this.freq = frequency;
+            this.seaLevel = seaLevel;
         }
 
         init() {
@@ -54,7 +56,12 @@ namespace Maps {
 
                     c = Math.floor(o * 255);
 
-                    pixelArray.push(c, c, c, 255) //R,G,B,A
+                    if (c > this.seaLevel) {
+                      pixelArray.push(c, c, c, 255) //R,G,B,A
+                    } else {
+                      pixelArray.push(41, 128, 185, 200)
+                    }
+
                 }
             }
 
@@ -63,11 +70,11 @@ namespace Maps {
 
 
             //TEMP!!! Inject
-            var canv = document.createElement("canvas");
-            $('#mapCanvas').append(canv);
+            $('#canvas').attr("style", "width:" + this.sizeX + ";height:" + this.sizeY +";")
+
+            var canv = <HTMLCanvasElement>document.getElementById("canvas");
             canv.width = this.sizeX;
             canv.height = this.sizeY;
-            document.body.appendChild(canv);
             var ctx = canv.getContext("2d");
             var idata = new ImageData(cArray, this.sizeX, this.sizeY);
             ctx.putImageData(idata, 0, 0);

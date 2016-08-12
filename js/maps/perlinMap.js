@@ -1,11 +1,12 @@
 var Maps;
 (function (Maps) {
     class PerlinMap {
-        constructor(mapMaxX, mapMaxY, frequency) {
+        constructor(mapMaxX, mapMaxY, frequency, seaLevel) {
             this.sizeX = mapMaxX;
             this.sizeY = mapMaxY;
             this.data = [];
             this.freq = frequency;
+            this.seaLevel = seaLevel;
         }
         init() {
             for (var i = 0; i <= this.sizeX; i++) {
@@ -36,15 +37,19 @@ var Maps;
                     var nx = j / this.sizeX - 0.5, ny = i / this.sizeY - 0.5;
                     var o = n.perlin2(this.freq * nx, this.freq * ny) / 2 + 0.5;
                     c = Math.floor(o * 255);
-                    pixelArray.push(c, c, c, 255);
+                    if (c > this.seaLevel) {
+                        pixelArray.push(c, c, c, 255);
+                    }
+                    else {
+                        pixelArray.push(41, 128, 185, 200);
+                    }
                 }
             }
             var cArray = Uint8ClampedArray.from(pixelArray);
-            var canv = document.createElement("canvas");
-            $('#mapCanvas').append(canv);
+            $('#canvas').attr("style", "width:" + this.sizeX + ";height:" + this.sizeY + ";");
+            var canv = document.getElementById("canvas");
             canv.width = this.sizeX;
             canv.height = this.sizeY;
-            document.body.appendChild(canv);
             var ctx = canv.getContext("2d");
             var idata = new ImageData(cArray, this.sizeX, this.sizeY);
             ctx.putImageData(idata, 0, 0);

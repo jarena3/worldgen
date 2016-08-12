@@ -16,108 +16,97 @@
 </head>
 
 <body>
-
-
-
-
-
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="col-md-4 control">
-            <form class="form-inline">
-              <div class="form-group">
-                <div class="input-group">
-                  <div class="input-group-addon">X</div>
-                  <input type="text" class="form-control" id="exampleInputAmount" placeholder="World Width">
-                </div>
-              </div>
-            </form>
-          </div>
-          <div class="col-md-4 control">
-            <form class="form-inline">
-              <div class="form-group">
-                <div class="input-group">
-                  <div class="input-group-addon">Y</div>
-                  <input type="text" class="form-control" id="exampleInputAmount" placeholder="World Height">
-                </div>
-              </div>
-            </form>
-          </div>
-          <div class="col-md-4 control">
-            <input id="seaLevel" type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.4"/>
-            <br />
-            <span>Sea Level: <span id="seaLevelSliderVal">0.4</span></span>
-          </div>
+    <div class="row">
+        <div class="col-md-12" id="canvas-container">
+            <canvas id="canvas" width="800" height="350" style="border: 1px solid #cccccc;">
+                HTML5 Canvas not supported
+            </canvas>
         </div>
+
+    <div id="exTab2" class="container">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#1" data-toggle="tab">Continents</a></li>
+            <li><a href="#2" data-toggle="tab">Temperature and Moisture</a></li>
+            <li><a href="#3" data-toggle="tab">Solution</a></li>
+            <li><a href="#3" data-toggle="tab">Solution</a></li>
+        </ul>
+
+        <div class="tab-content bordered">
+            <div class="tab-pane active" id="1">
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="col-md-4 control">
+                              <form class="form-inline">
+                                  <div class="form-group">
+                                      <div class="input-group">
+                                          <div class="input-group-addon">X</div>
+                                          <input type="text" class="form-control" id="world-max-width" placeholder="World Width" value="800">
+                                      </div>
+                                  </div>
+                              </form>
+                          </div>
+                          <div class="col-md-4 control">
+                              <form class="form-inline">
+                                  <div class="form-group">
+                                      <div class="input-group">
+                                          <div class="input-group-addon">Y</div>
+                                          <input type="text" class="form-control" id="world-max-height" placeholder="World Height" value="500">
+                                      </div>
+                                  </div>
+                              </form>
+                          </div>
+                          <div class="col-md-4 control">
+                              <input id="sea-level" type="text" data-slider-min="0" data-slider-max="255" data-slider-step="1" data-slider-value="150" />
+                              <br />
+                              <span>Sea Level: <span id="seaLevelSliderVal">150</span></span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="col-md-3 control">
+                              <input id="continentFrequency" type="text" data-slider-min="1" data-slider-max="20" data-slider-step="0.1" data-slider-value="6" />
+                              <br />
+                              <span>Continent Frequency: <span id="continentFrequencySliderVal">6</span></span>
+                          </div>
+                          <div class="col-md-3 control">
+                              <input id="continentOctaves" type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5" />
+                              <br />
+                              <span>Continent Octaves: <span id="continentOctavesSliderVal">5</span></span>
+                          </div>
+                          <div class="col-md-3 control">
+                              <input id="shelfFrequency" type="text" data-slider-min="1" data-slider-max="6" data-slider-step="0.01" data-slider-value="2" />
+                              <br />
+                              <span>Shelf Frequency: <span id="shelfFrequencySliderVal">2</span></span>
+                          </div>
+                          <div class="col-md-3 control">
+                              <input id="shelfOctaves" type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5" />
+                              <br />
+                              <span>Shelf Octaves: <span id="shelfOctavesSliderVal">5</span></span>
+                          </div>
+                      </div>
+                  </div>
+
+            </div>
+            <div class="tab-pane" id="2">
+                <h3>Notice the gap between the content and tab after applying a background color</h3>
+            </div>
+            <div class="tab-pane" id="3">
+                <h3>add clearfix to tab-content (see the css)</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+          <button type="button" class="btn btn-success center-block" id="generate-btn">Generate</button>
       </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-3 control">
-                  <input id="continentFrequency" type="text" data-slider-min="1" data-slider-max="6" data-slider-step="0.01" data-slider-value="2"/>
-                  <br />
-                  <span>Continent Frequency: <span id="continentFrequencySliderVal">2</span></span>
-                </div>
-                <div class="col-md-3 control">
-                  <input id="continentOctaves" type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5"/>
-                  <br />
-                  <span>Continent Octaves: <span id="continentOctavesSliderVal">5</span></span>
-                </div>
-                <div class="col-md-3 control">
-                  <input id="shelfFrequency" type="text" data-slider-min="1" data-slider-max="6" data-slider-step="0.01" data-slider-value="2"/>
-                  <br />
-                  <span>Shelf Frequency: <span id="shelfFrequencySliderVal">2</span></span>
-                </div>
-                <div class="col-md-3 control">
-                  <input id="shelfOctaves" type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5"/>
-                  <br />
-                  <span>Shelf Octaves: <span id="shelfOctavesSliderVal">5</span></span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-            <div class="row">
-              <div class="col-md-12">
-                  <div class="col-md-4 control">
-                  </div>
-                  <div class="col-md-4 control">
-                  </div>
-                  <div class="col-md-4 control">
-                  </div>
-              </div>
-                </row>
-            </div>
-
-
-
-            <div id="exTab2" class="container">
-            <ul class="nav nav-tabs">
-                  <li class="active">
-                    <a  href="#1" data-toggle="tab">Overview</a>
-                  </li>
-                  <li><a href="#2" data-toggle="tab">Without clearfix</a>
-                  </li>
-                  <li><a href="#3" data-toggle="tab">Solution</a>
-                  </li>
-                </ul>
-
-                  <div class="tab-content bordered">
-                    <div class="tab-pane active" id="1">
-                      <h3>Standard tab panel created on bootstrap using nav-tabs</h3>
-                    </div>
-                    <div class="tab-pane" id="2">
-                      <h3>Notice the gap between the content and tab after applying a background color</h3>
-                    </div>
-                    <div class="tab-pane" id="3">
-                      <h3>add clearfix to tab-content (see the css)</h3>
-                    </div>
-                  </div>
-              </div>
+    </div>
 
 </body>
 
 </html>
 <footer>
-    <script src="./js/gen.js"></script>
+  <script src="./js/page/page.js"></script>
+  <script src="./js/gen.js"></script>
 </footer>
